@@ -52,6 +52,119 @@
 @media print{@page{size:A4;margin:12mm}*{animation:none!important;transition:none!important;box-shadow:none!important;text-shadow:none!important}html,body{background:white!important;color:black!important;font:9pt/1.25 'IBM Plex Sans',Arial,sans-serif!important}body>*:not(.main){display:none!important}.main{margin:0!important}.main>*:not(#recursos){display:none!important}#recursos{display:block!important;padding:0!important;margin:0!important;overflow:visible!important;background:white!important}#recursos>*:not(#recursos-formulas){display:none!important}#recursos-formulas{display:block!important;margin:0!important;padding:0!important}#recursos-formulas>.smallcaps,#recursos-formulas>h3,.formula-tools{display:none!important}.formula-sheet{columns:2;column-gap:8mm;color:black!important}.formula-sheet .print-title{display:block;column-span:all;font:18pt Fraunces,Georgia,serif!important;margin:0 0 6mm}.formula-topic{margin:0 0 5mm!important;break-inside:avoid;overflow:visible!important}.formula-topic[hidden]{display:none!important}.formula-topic h4{font:bold 11pt Arial!important;margin:0 0 2mm!important}.formula-topic table{min-width:0!important;table-layout:fixed!important;font:7.5pt/1.3 Arial!important;width:100%!important}.formula-topic th,.formula-topic td{padding:2mm 1mm!important;color:black!important;border-bottom:.2mm solid #aaa!important;overflow-wrap:anywhere}.formula-topic td:first-child{width:62%!important}.formula-topic .k-formula{color:black!important;font:8pt/1.4 Arial!important;white-space:normal!important;overflow:visible!important}.formula-topic .katex{font-size:.9em!important}.formula-topic .katex-display{margin:1mm 0!important;text-align:left!important}.formula-topic .katex-display>.katex{white-space:normal!important}.sheet-note{font:7.5pt/1.4 Arial!important;color:black!important;column-span:all}.resource-section a::after{content:none!important}.cursor,.cursor-dot,.toast-stack,.dependency-notices,.qr-projection{display:none!important}}
 
 </style>
+<style id="universe-mobile-style">
+/* INICIO · Mejora opcional: universo, paletas y sistema solar móvil.
+   Pegar al final de <head>, dentro de <style>. Quitar junto con el JS asociado. */
+@property --base{syntax:'<color>';inherits:true;initial-value:#070a14}
+@property --a1{syntax:'<color>';inherits:true;initial-value:#172d50}
+@property --a2{syntax:'<color>';inherits:true;initial-value:#30203e}
+@property --stars{syntax:'<number>';inherits:true;initial-value:.62}
+body.universe-enhanced{--base:#070a14;--a1:#172d50;--a2:#30203e;--stars:.62;--night:var(--base);background:var(--base);isolation:isolate;transition:--base 1.5s ease,--a1 1.5s ease,--a2 1.5s ease,--stars 1.5s ease;--first-base:#06202b;--solar-shift:0px;--copy-shift:0px;--copy-alpha:1}
+body.universe-enhanced[data-palette=cinematica]{--base:#06202b;--a1:#0f8aa6;--a2:#2557a6;--stars:.17}
+body.universe-enhanced[data-palette=dinamica]{--base:#0b1d17;--a1:#2f9a72;--a2:#9bb34a;--stars:.12}
+body.universe-enhanced[data-palette=kepler]{--base:#130d2b;--a1:#6a45e0;--a2:#c4478f;--stars:.36}
+body.universe-enhanced[data-palette=energia]{--base:#220f0b;--a1:#e0572b;--a2:#e8a33d;--stars:.13}
+body.universe-enhanced[data-palette=juegos]{--base:#1a0d24;--a1:#c0408c;--a2:#3fb5c1;--stars:.22}
+body.universe-enhanced[data-palette=recursos]{--base:#181510;--a1:#b99b5a;--a2:#6d7f93;--stars:.09}
+body.universe-enhanced.light{--base:#eceef3;--a1:#9aaecb;--a2:#c8bfd3;--stars:.16;--first-base:#e2f0f2;--paper:#172235;--muted:#49596b;--pale:#354f66}
+body.universe-enhanced.light[data-palette=cinematica]{--base:#e2f0f2;--a1:#93cbd3;--a2:#a9bedf;--stars:.08}
+body.universe-enhanced.light[data-palette=dinamica]{--base:#e7eee4;--a1:#a7ceba;--a2:#cbd3ac;--stars:.06}
+body.universe-enhanced.light[data-palette=kepler]{--base:#ece7f3;--a1:#c3b2e2;--a2:#dcb7cd;--stars:.12}
+body.universe-enhanced.light[data-palette=energia]{--base:#f3e9df;--a1:#e8baa5;--a2:#e3c895;--stars:.06}
+body.universe-enhanced.light[data-palette=juegos]{--base:#f0e6ee;--a1:#d9b4cc;--a2:#abd0d1;--stars:.08}
+body.universe-enhanced.light[data-palette=recursos]{--base:#efece3;--a1:#d7c89f;--a2:#bbc8d1;--stars:.05}
+.universe-atmosphere{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;background:var(--base);contain:strict}
+.universe-atmosphere .universe-light{position:absolute;width:75vmax;height:75vmax;border-radius:50%;filter:blur(65px);opacity:.34;will-change:transform;background:radial-gradient(ellipse,color-mix(in srgb,var(--a1) 64%,transparent),transparent 65%);left:-26vmax;top:-30vmax;animation:observatory-drift-a 46s ease-in-out infinite alternate}
+.universe-atmosphere .universe-light.second{background:radial-gradient(ellipse,color-mix(in srgb,var(--a2) 58%,transparent),transparent 66%);left:auto;top:auto;right:-30vmax;bottom:-32vmax;animation:observatory-drift-b 43s ease-in-out infinite alternate}
+.universe-stars{position:absolute;inset:-180px;opacity:var(--stars);transform:translate3d(0,var(--star-shift,0px),0);background-image:radial-gradient(1px 1px at 17px 31px,#d5dbe7 75%,transparent),radial-gradient(1px 1px at 82px 91px,#b6c5d4 70%,transparent),radial-gradient(1.3px 1.3px at 123px 51px,#e8e0cf 70%,transparent);background-size:191px 173px,277px 239px,389px 317px;will-change:transform}
+.universe-cursor-light{position:absolute;inset:0;background:radial-gradient(440px circle at var(--light-x,-900px) var(--light-y,-900px),color-mix(in srgb,var(--a1) 11%,transparent),transparent 75%)}
+@keyframes observatory-drift-a{to{transform:translate3d(14vw,12vh,0) rotate(12deg)}}
+@keyframes observatory-drift-b{to{transform:translate3d(-12vw,-10vh,0) rotate(-9deg)}}
+.universe-enhanced .main{position:relative;z-index:0}.universe-enhanced .chapters,.universe-enhanced.light .chapters{background:transparent!important}
+.universe-enhanced .hero{background:transparent}.universe-enhanced .chapter{--c1:var(--a1);--c2:var(--a2);background-color:transparent;background-image:radial-gradient(ellipse 65% 550px at 0 0,color-mix(in srgb,var(--c1) 11%,transparent),transparent 80%),radial-gradient(ellipse 60% 650px at 100% 100%,color-mix(in srgb,var(--c2) 9%,transparent),transparent 80%)}
+.universe-enhanced #cinematica{--c1:#0f8aa6;--c2:#2557a6;border-top-color:transparent}.universe-enhanced #dinamica{--c1:#2f9a72;--c2:#9bb34a}.universe-enhanced #kepler{--c1:#6a45e0;--c2:#c4478f}.universe-enhanced #energia{--c1:#e0572b;--c2:#e8a33d}.universe-enhanced #juegos{--c1:#c0408c;--c2:#3fb5c1}.universe-enhanced #recursos{--c1:#b99b5a;--c2:#6d7f93}
+.universe-enhanced.light #cinematica{--c1:#558e9f;--c2:#7396bd}.universe-enhanced.light #dinamica{--c1:#649379;--c2:#8c9859}.universe-enhanced.light #kepler{--c1:#9c81bc;--c2:#b27f9c}.universe-enhanced.light #energia{--c1:#bb876a;--c2:#b49854}.universe-enhanced.light #juegos{--c1:#b783a2;--c2:#729f9f}.universe-enhanced.light #recursos{--c1:#a18d59;--c2:#8698aa}
+.universe-enhanced .chapter-number{display:flex;align-items:center;gap:13px}.universe-enhanced .chapter-number::before{content:'';width:32px;height:1px;background:var(--c1);box-shadow:0 0 11px color-mix(in srgb,var(--c1) 65%,transparent)}
+.universe-enhanced .chapter .k-box{transition:border-color .25s,box-shadow .25s}.universe-enhanced .chapter .c-sim{box-shadow:0 14px 35px -27px color-mix(in srgb,var(--c1) 60%,transparent)}
+@media(hover:hover) and (pointer:fine){.universe-enhanced .chapter .k-box:hover{border-color:color-mix(in srgb,var(--c1) 55%,var(--line));box-shadow:0 8px 30px -17px color-mix(in srgb,var(--c1) 38%,transparent)}}
+.universe-enhanced .chapter-sticky{background:color-mix(in srgb,var(--base) 84%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);transition:background 1.5s,color .3s}
+.universe-enhanced .hero-copy{transform:translate3d(0,var(--copy-shift),0);opacity:var(--copy-alpha);will-change:transform,opacity}.universe-enhanced .solar-stage,.universe-enhanced .solar-labels{transform:translate3d(0,var(--solar-shift),0);will-change:transform}
+.universe-enhanced .universe-horizon{position:absolute;left:0;right:0;bottom:-1px;height:240px;pointer-events:none;z-index:3;background:radial-gradient(ellipse 75% 65% at 50% 100%,color-mix(in srgb,var(--a1) 23%,transparent),transparent 90%),linear-gradient(to bottom,transparent,color-mix(in srgb,var(--base) 65%,var(--first-base)) 85%,var(--first-base));opacity:.9}
+.universe-enhanced .hero-vignette{background:linear-gradient(90deg,color-mix(in srgb,var(--base) 92%,transparent),transparent 70%),linear-gradient(0deg,color-mix(in srgb,var(--base) 48%,transparent),transparent 36%)}
+.universe-enhanced.light .hero{color:var(--paper)}.universe-enhanced.light .hero-lead{color:#43556a}.universe-enhanced.light .hero h1 em{color:#9b641c}.universe-enhanced.light .hero-index,.universe-enhanced.light .hero-scroll{color:#3d536b}.universe-enhanced.light .hero-topline span{color:#43556a}.universe-enhanced.light .scene-hint{background:rgba(239,241,244,.9);color:#3d5063;border-color:rgba(35,55,75,.2)}
+@media(max-width:760px){
+ .universe-enhanced .hero{--solar-scene-height:max(400px,56svh);--copy-bottom:450px;padding-top:94px;height:calc(var(--copy-bottom) + var(--solar-scene-height) + 116px);min-height:0}
+ .universe-enhanced .hero-copy{position:relative;left:auto;right:auto;top:auto;width:auto;max-width:none;margin:0 22px;z-index:5}
+ .universe-enhanced .hero h1{font-size:clamp(46px,14vw,58px);line-height:1;letter-spacing:-.05em;margin-bottom:14px}.universe-enhanced .hero-copy .eyebrow{margin-bottom:15px;font-size:9px}.universe-enhanced .hero-lead{font-size:14px;line-height:1.6;max-width:40ch}.universe-enhanced .hero-actions{margin-top:19px;gap:9px}.universe-enhanced .hero-actions .btn{min-height:43px;padding:10px 13px;font-size:11px}.universe-enhanced .hero-index{margin-top:12px}
+ .universe-enhanced .solar-stage,.universe-enhanced .solar-labels{inset:auto 0 auto;top:var(--copy-bottom);height:var(--solar-scene-height);width:100%}
+ .universe-enhanced .solar-stage,.universe-enhanced .solar-stage canvas,.universe-enhanced .planet-label{touch-action:pan-y}.universe-enhanced.planet-focus .solar-stage,.universe-enhanced.planet-focus .solar-stage canvas,.universe-enhanced.planet-focus .planet-label{touch-action:none}
+ .universe-enhanced .hero-vignette{background:linear-gradient(180deg,color-mix(in srgb,var(--base) 30%,transparent),transparent 30%,transparent 80%,color-mix(in srgb,var(--base) 25%,transparent))}
+ .universe-enhanced .scene-hint{top:calc(var(--copy-bottom) + 12px);right:18px;font-size:8px;padding:8px}.universe-enhanced .scene-error{top:calc(var(--copy-bottom) + var(--solar-scene-height)/2);width:calc(100% - 44px)}
+ .universe-enhanced .control-dock-shell{bottom:53px;right:18px;width:min(310px,calc(100% - 84px))}.universe-enhanced .scale-info{bottom:56px;left:20px}.universe-enhanced .hero-scroll{bottom:18px}.universe-enhanced .hero-topline{top:75px;left:22px;right:22px;font-size:8px}.universe-enhanced .hero-topline span:last-child{display:none}
+ .universe-enhanced .planet-card{max-height:min(70svh,560px)!important;padding:10px 20px 22px!important}.universe-enhanced .planet-card .sheet-handle{font-size:0;height:23px;padding:12px 0 0}.universe-enhanced .planet-card .planet-card-top{min-height:25px}.universe-enhanced .planet-card #planet-close{position:absolute;right:15px;top:13px;z-index:2}.universe-enhanced .planet-card #planet-title{margin:0 38px 15px 0;font-size:30px;line-height:1.15}.universe-enhanced .planet-card.sheet-peek{height:112px!important;max-height:112px!important;overflow:hidden}.universe-enhanced .planet-card.sheet-peek #planet-title{font-size:27px;margin:0 38px 0 0}.universe-enhanced .planet-card.sheet-peek #planet-description,.universe-enhanced .planet-card.sheet-peek #planet-data,.universe-enhanced .planet-card.sheet-peek #planet-footnote{display:none}
+ .universe-enhanced:not(.universe-hero-visible) .planet-card.show{visibility:hidden!important;opacity:0!important;pointer-events:none!important}
+ .universe-enhanced.planet-focus .hero-copy{opacity:0!important;pointer-events:none}.universe-enhanced.planet-focus .hero-copy *{pointer-events:none!important}.universe-enhanced.planet-focus .hero-scroll,.universe-enhanced.planet-focus .chapter-sticky,.universe-enhanced.planet-focus .hero-topline{opacity:0;pointer-events:none}.universe-enhanced .hero-copy,.universe-enhanced .hero-scroll,.universe-enhanced .chapter-sticky{transition:opacity .25s ease}
+}
+@media(prefers-reduced-motion:reduce){body.universe-enhanced{transition:none}.universe-atmosphere .universe-light{animation:none;will-change:auto}.universe-enhanced .solar-stage,.universe-enhanced .solar-labels,.universe-enhanced .hero-copy,.universe-stars{transform:none!important;will-change:auto}.universe-enhanced .hero-copy{opacity:1}.universe-cursor-light{display:none}.universe-enhanced .hero-copy,.universe-enhanced .hero-scroll,.universe-enhanced .chapter-sticky,.universe-enhanced .chapter .k-box{transition:none}}
+@media print{.universe-atmosphere,.universe-horizon{display:none!important}body.universe-enhanced{background:white!important}.universe-enhanced .chapter{background:none!important}}
+/* FIN · Mejora opcional de universo y móvil. */
+
+</style>
+<style id="paletas-vivas-style">
+/* INICIO · Paletas vivas y barra lateral sincronizada (añadido reversible).
+   Pegar DESPUÉS de los estilos existentes, antes de </head>, dentro de <style>.
+   Complementa universo-mobile.css; no cambia escenas, fórmulas ni controles. */
+body.universe-enhanced{--base:#070a1c;--a1:#3b2a9c;--a2:#1b4fc4;--first-base:#053544;--panelSolid:color-mix(in srgb,var(--base) 83%,black);--panel:color-mix(in srgb,var(--panelSolid) 92%,transparent);--paper:#fff3e8;--muted:#e3d9df;--pale:#f0e5f5;--line:rgba(255,243,232,.2)}
+body.universe-enhanced[data-palette=portada]{--base:#070a1c;--a1:#3b2a9c;--a2:#1b4fc4}
+body.universe-enhanced[data-palette=cinematica]{--base:#053544;--a1:#00b8d9;--a2:#3a86ff}
+body.universe-enhanced[data-palette=dinamica]{--base:#0b3d2e;--a1:#22d18b;--a2:#b8e04a}
+body.universe-enhanced[data-palette=kepler]{--base:#2a1058;--a1:#8c52ff;--a2:#ff4f9d}
+body.universe-enhanced[data-palette=energia]{--base:#4d1609;--a1:#ff5c2b;--a2:#ffb52e}
+body.universe-enhanced[data-palette=juegos]{--base:#43104c;--a1:#ff3fa0;--a2:#22d3ee}
+body.universe-enhanced[data-palette=recursos]{--base:#3b2c0a;--a1:#f2b632;--a2:#3fa8a0}
+body.universe-enhanced.light{--base:#e8e0fa;--a1:#a490eb;--a2:#8daff1;--first-base:#d5f3f3;--paper:#321c39;--muted:#584359;--pale:#49304f;--line:rgba(65,30,60,.21);--panelSolid:color-mix(in srgb,var(--base) 70%,white);--panel:color-mix(in srgb,var(--panelSolid) 94%,transparent)}
+body.universe-enhanced.light[data-palette=portada]{--base:#e8e0fa;--a1:#a490eb;--a2:#8daff1}
+body.universe-enhanced.light[data-palette=cinematica]{--base:#d5f3f3;--a1:#68cddd;--a2:#8ab6f8;--paper:#073b43;--muted:#245760;--pale:#16464e}
+body.universe-enhanced.light[data-palette=dinamica]{--base:#d9f2d9;--a1:#7ed4ae;--a2:#cadf7a;--paper:#163e2a;--muted:#365a3b;--pale:#214a30}
+body.universe-enhanced.light[data-palette=kepler]{--base:#eadbfa;--a1:#bb91f0;--a2:#ed9ec6;--paper:#401b60;--muted:#62416d;--pale:#4e295e}
+body.universe-enhanced.light[data-palette=energia]{--base:#ffe2cb;--a1:#f4a17c;--a2:#edc36a;--paper:#59270f;--muted:#785038;--pale:#63371f}
+body.universe-enhanced.light[data-palette=juegos]{--base:#f6ddef;--a1:#ec92c1;--a2:#7ed8df;--paper:#571b4e;--muted:#734468;--pale:#602c56}
+body.universe-enhanced.light[data-palette=recursos]{--base:#f6ebc6;--a1:#e1bf66;--a2:#91c8b6;--paper:#4b3810;--muted:#6b572e;--pale:#58441b}
+.universe-enhanced .universe-atmosphere .universe-light{opacity:.53}.universe-enhanced.light .universe-atmosphere .universe-light{opacity:.4}
+.universe-enhanced #cinematica{--c1:#00b8d9;--c2:#3a86ff}.universe-enhanced #dinamica{--c1:#22d18b;--c2:#b8e04a}.universe-enhanced #kepler{--c1:#8c52ff;--c2:#ff4f9d}.universe-enhanced #energia{--c1:#ff5c2b;--c2:#ffb52e}.universe-enhanced #juegos{--c1:#ff3fa0;--c2:#22d3ee}.universe-enhanced #recursos{--c1:#f2b632;--c2:#3fa8a0}
+.universe-enhanced.light #cinematica{--c1:#268d9b;--c2:#477fbd}.universe-enhanced.light #dinamica{--c1:#28865c;--c2:#798b26}.universe-enhanced.light #kepler{--c1:#8752bd;--c2:#b5417f}.universe-enhanced.light #energia{--c1:#b95528;--c2:#a67b16}.universe-enhanced.light #juegos{--c1:#b34785;--c2:#2b8e98}.universe-enhanced.light #recursos{--c1:#97731d;--c2:#397f70}
+.universe-enhanced .chapter{background-image:radial-gradient(ellipse 70% 650px at 0 0,color-mix(in srgb,var(--c1) 18%,transparent),transparent 82%),radial-gradient(ellipse 65% 700px at 100% 100%,color-mix(in srgb,var(--c2) 14%,transparent),transparent 82%)}
+/* El body anima los colores tipados. La barra hereda exactamente esa transición. */
+body.universe-enhanced .sidebar,body.universe-enhanced.light .sidebar,body.universe-enhanced .mobile-top{background-color:color-mix(in srgb,var(--base) 87%,black);background-image:radial-gradient(ellipse at 0 0,color-mix(in srgb,var(--a1) 23%,transparent),transparent 68%),radial-gradient(ellipse at 100% 100%,color-mix(in srgb,var(--a2) 16%,transparent),transparent 70%);border-color:color-mix(in srgb,var(--a1) 35%,var(--line));color:var(--paper)}
+body.universe-enhanced.light .sidebar,body.universe-enhanced.light .mobile-top{background-color:color-mix(in srgb,var(--base) 90%,white)}
+.universe-enhanced .sidebar .nav-link{color:color-mix(in srgb,var(--paper) 79%,transparent)}
+.universe-enhanced .sidebar .nav-link:hover,.universe-enhanced .sidebar .nav-link[aria-current=location],.universe-enhanced .sidebar .nav-link.is-current-section{color:var(--paper);background:color-mix(in srgb,var(--a1) 19%,transparent)}
+.universe-enhanced .sidebar .nav-link[aria-current=location]::before{background:var(--a1);box-shadow:0 0 12px color-mix(in srgb,var(--a1) 55%,transparent)}
+.universe-enhanced .sidebar .nav-link .number,.universe-enhanced .sidebar .brand span,.universe-enhanced .sidebar .nav-caption,.universe-enhanced .sidebar .sidebar-foot{color:var(--muted)}
+.universe-enhanced .sidebar .chapter-toggle{color:var(--paper)}.universe-enhanced .sidebar .is-open .chapter-toggle{color:var(--a1)}
+.universe-enhanced .sidebar .sidetools,.universe-enhanced .sidebar .tool-btn,.universe-enhanced .sidebar .sidebar-score{border-color:var(--line)}
+.universe-enhanced .sidebar .sidebar-score{color:var(--paper);background:color-mix(in srgb,var(--a2) 9%,transparent)}
+.universe-enhanced .sidebar-score .smallcaps,.universe-enhanced .sidebar-score .score-number>span{color:var(--muted)}
+.universe-enhanced.light .sidebar .is-open .chapter-toggle{color:var(--paper)}
+/* Superficies con el tono del capítulo; el QR conserva blanco y negro para leerse. */
+.universe-enhanced .control-dock-shell,.universe-enhanced .planet-card,.universe-enhanced .scene-error,.universe-enhanced .toast,.universe-enhanced .qr-projection{background-color:var(--panelSolid);color:var(--paper);border-color:var(--line)}
+.universe-enhanced .control-dock{background:transparent;color:var(--paper)}
+.universe-enhanced .control-dock .slider-top,.universe-enhanced .control-dock .dock-title,.universe-enhanced .control-dock label,.universe-enhanced .planet-card h2{color:var(--paper)}
+.universe-enhanced .control-dock .smallcaps,.universe-enhanced .control-dock .reset-link,.universe-enhanced .planet-card p,.universe-enhanced .planet-card dt,.universe-enhanced .planet-card .sheet-handle{color:var(--muted)}
+.universe-enhanced .planet-card dd,.universe-enhanced .planet-card .close-card{color:var(--paper)}
+.universe-enhanced .planet-label{background:color-mix(in srgb,var(--base) 90%,transparent);border-color:var(--line);color:var(--paper)}
+.universe-enhanced .planet-label.active{color:var(--amber);border-color:var(--amber)}
+.universe-enhanced.light .hero-lead,.universe-enhanced.light .hero-topline span,.universe-enhanced.light .hero-index,.universe-enhanced.light .hero-scroll{color:var(--muted)}
+.universe-enhanced .chapter .game-card,.universe-enhanced .chapter .game-panel,.universe-enhanced .chapter .quiz-answer{background-color:var(--panelSolid)}
+.universe-enhanced .plot-empty{background:color-mix(in srgb,var(--panelSolid) 95%,transparent);color:var(--paper)}
+.universe-enhanced canvas.c-graph,.universe-enhanced .game-stage canvas{background-color:var(--panelSolid)}
+.universe-enhanced .chapter-sticky{background:color-mix(in srgb,var(--base) 84%,transparent)}
+@media(prefers-reduced-motion:reduce){body.universe-enhanced{transition:none}.universe-enhanced .sidebar,.universe-enhanced .mobile-top{transition:none}}
+@media print{body.universe-enhanced{--paper:black;--muted:black;--pale:black;--panel:white;--panelSolid:white;background:white!important}.universe-enhanced .sidebar,.universe-enhanced .mobile-top{display:none!important}}
+/* FIN · Paletas vivas y barra lateral sincronizada. */
+.universe-enhanced.light .sidebar .score-badge{color:#81500c;border-color:#a97519}.universe-enhanced.light .sidebar .topic-progress{border-color:var(--muted)}
+
+</style>
 </head>
 <body>
 <div id="reading-progress" aria-hidden="true"></div>
@@ -1006,6 +1119,65 @@ initializeFinalModule();
 
 
 })();
+</script>
+<script id="universe-mobile-script">
+/* INICIO · Mejora opcional de universo y móvil.
+   Pegar después del script existente, justo antes de </body>, dentro de <script>.
+   No cambia ecuaciones ni métodos de integración. Las llamadas originales de selección se conservan. */
+(()=>{'use strict';try{
+function install(){
+ const body=document.body,hero=document.getElementById('portada'),copy=hero?.querySelector('.hero-copy'),stage=document.getElementById('solar-stage'),labels=document.getElementById('solar-labels'),sheet=document.getElementById('planet-card');
+ if(!hero||!copy||!stage||!labels||!sheet||body.classList.contains('universe-enhanced'))return;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)'),small=matchMedia('(max-width: 760px)'),fine=matchMedia('(hover: hover) and (pointer: fine)'),sections=['cinematica','dinamica','kepler','energia','juegos','recursos'].map(id=>document.getElementById(id)).filter(Boolean);
+ const atmosphere=document.createElement('div');atmosphere.className='universe-atmosphere';atmosphere.setAttribute('aria-hidden','true');atmosphere.innerHTML='<div class="universe-light"></div><div class="universe-light second"></div><div class="universe-stars"></div><div class="universe-cursor-light"></div>';body.prepend(atmosphere);
+ const horizon=document.createElement('div');horizon.className='universe-horizon';horizon.setAttribute('aria-hidden','true');hero.appendChild(horizon);body.classList.add('universe-enhanced');
+ let paintFrame=0,measureFrame=0,centerFrame=0,lastCopy=-1,attached=null,tap=null,mouse={x:-900,y:-900},wasLight=body.classList.contains('light'),previousPeek=sheet.classList.contains('sheet-peek');
+ const safe=fn=>(...args)=>{try{return fn(...args)}catch(_){/* Un efecto visual no debe interrumpir el cuaderno. */}};
+ const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),viewport=()=>window.innerHeight||document.documentElement.clientHeight;
+ function headerBottom(){const bar=document.querySelector('.mobile-top');return small.matches&&bar?Math.max(0,bar.getBoundingClientRect().bottom):0}
+ function heroVisible(){const r=hero.getBoundingClientRect();return r.bottom>headerBottom()+72&&r.top<viewport()}
+ function paletteAt(){const height=viewport(),r=hero.getBoundingClientRect();if(r.bottom>height*.62)return'portada';let active=sections[0]?.id||'portada';for(const section of sections)if(section.getBoundingClientRect().top<=height*.5)active=section.id;return active}
+ function syncSelection(){const selected=!!window.solarApp?.selected&&sheet.classList.contains('show'),visible=heroVisible();body.classList.toggle('universe-hero-visible',visible);body.classList.toggle('planet-focus',small.matches&&selected&&visible);if(!small.matches)tap=null}
+ function paint(){paintFrame=0;const palette=paletteAt();if(body.dataset.palette!==palette)body.dataset.palette=palette;syncSelection();const r=hero.getBoundingClientRect(),travel=clamp(-r.top,0,r.height),limited=reduced.matches||body.classList.contains('planet-focus');body.style.setProperty('--solar-shift',limited?'0px':Math.min(small.matches?44:155,travel*(small.matches?.06:.16)).toFixed(2)+'px');body.style.setProperty('--copy-shift',limited?'0px':Math.min(small.matches?20:85,travel*(small.matches?.025:.075)).toFixed(2)+'px');body.style.setProperty('--copy-alpha',reduced.matches?'1':String(clamp(1-travel/(Math.max(1,r.height)*.57),0,1)));atmosphere.style.setProperty('--star-shift',reduced.matches?'0px':(-Math.min(160,Math.max(0,window.scrollY||0)*.025)).toFixed(2)+'px');atmosphere.style.setProperty('--light-x',mouse.x+'px');atmosphere.style.setProperty('--light-y',mouse.y+'px')}
+ function refresh(){if(!paintFrame)paintFrame=requestAnimationFrame(safe(paint))}
+ function measure(){measureFrame=0;if(small.matches){const bottom=Math.ceil(copy.offsetTop+copy.offsetHeight+24);if(Number.isFinite(bottom)&&bottom>24&&bottom!==lastCopy){lastCopy=bottom;hero.style.setProperty('--copy-bottom',bottom+'px')}}else{lastCopy=-1;hero.style.removeProperty('--copy-bottom')}window.solarApp?.resize();refresh();if(body.classList.contains('planet-focus'))centerPlanet()}
+ function queueMeasure(){if(!measureFrame)measureFrame=requestAnimationFrame(safe(measure))}
+ function centerPlanet(){if(centerFrame)return;centerFrame=requestAnimationFrame(safe(()=>{centerFrame=0;syncSelection();if(!small.matches||!body.classList.contains('planet-focus'))return;const height=viewport(),top=headerBottom()+12,cardHeight=Math.min(sheet.offsetHeight||112,height*.7),bottom=height-cardHeight-12;if(bottom<=top+60)return;const rect=stage.getBoundingClientRect(),desired=(top+bottom)/2,delta=rect.top+rect.height/2-desired,max=Math.max(0,document.documentElement.scrollHeight-height),target=clamp((window.scrollY||0)+delta,0,max);if(Math.abs(delta)>3)window.scrollTo({top:target,behavior:reduced.matches?'auto':'smooth'})}))}
+ function selected(){if(small.matches&&window.solarApp?.selected){sheet.classList.add('sheet-peek');sheet.querySelector('.sheet-handle')?.setAttribute('aria-expanded','false');previousPeek=true}syncSelection();refresh();centerPlanet()}
+ function attach(){const app=window.solarApp;if(!app||app===attached)return;attached=app;const originalSelect=app.select,originalClear=app.clearSelection;app.select=function(...args){const result=originalSelect.apply(this,args);safe(selected)();return result};app.clearSelection=function(...args){const result=originalClear.apply(this,args);safe(()=>{syncSelection();refresh()})();return result};
+  // En modo de exploración, dejar el gesto vertical al navegador. Un toque usa el raycaster original.
+  const canvas=app.renderer?.domElement;if(canvas){canvas.addEventListener('pointerdown',safe(event=>{if(!small.matches||app.selected||event.pointerType==='mouse')return;tap={id:event.pointerId,x:event.clientX,y:event.clientY,moved:false};event.stopImmediatePropagation()}),true);canvas.addEventListener('pointermove',safe(event=>{if(!small.matches||app.selected||!tap||tap.id!==event.pointerId)return;if(Math.hypot(event.clientX-tap.x,event.clientY-tap.y)>8)tap.moved=true;event.stopImmediatePropagation()}),true);canvas.addEventListener('pointerup',safe(event=>{if(!small.matches||app.selected||!tap||tap.id!==event.pointerId)return;const shouldSelect=!tap.moved;tap=null;event.stopImmediatePropagation();if(!shouldSelect)return;app.screenRay(event);const hit=app.raycaster.intersectObjects(app.hits,true)[0];if(hit){const name=hit.object.userData.planet;if(name)app.select(name)}}),true);canvas.addEventListener('pointercancel',safe(event=>{if(tap?.id===event.pointerId){tap=null;event.stopImmediatePropagation()}}),true)}
+  queueMeasure();if(app.selected)selected()
+ }
+ const onSheetChange=safe(()=>{syncSelection();const peek=sheet.classList.contains('sheet-peek');if(peek!==previousPeek){previousPeek=peek;centerPlanet()}refresh()});
+ if(typeof MutationObserver==='function'){new MutationObserver(onSheetChange).observe(sheet,{attributes:true,attributeFilter:['class']});new MutationObserver(safe(attach)).observe(stage,{childList:true});new MutationObserver(safe(()=>{const light=body.classList.contains('light');if(light!==wasLight){wasLight=light;refresh()}})).observe(body,{attributes:true,attributeFilter:['class']})}
+ if(typeof ResizeObserver==='function'){const resize=new ResizeObserver(safe(entries=>{if(entries.some(e=>e.target===copy))queueMeasure();if(entries.some(e=>e.target===stage)){window.solarApp?.resize();refresh()}if(entries.some(e=>e.target===sheet)&&body.classList.contains('planet-focus'))centerPlanet()}));resize.observe(copy);resize.observe(stage);resize.observe(sheet)}
+ sheet.querySelector('#planet-title')?.addEventListener('click',safe(()=>{if(small.matches)sheet.querySelector('.sheet-handle')?.click()}));
+ window.addEventListener('scroll',refresh,{passive:true});window.addEventListener('resize',queueMeasure,{passive:true});window.addEventListener('orientationchange',queueMeasure,{passive:true});window.visualViewport?.addEventListener('resize',queueMeasure,{passive:true});
+ document.fonts?.ready.then(safe(queueMeasure)).catch(()=>{});document.fonts?.addEventListener('loadingdone',queueMeasure);small.addEventListener('change',safe(()=>{queueMeasure();syncSelection();if(small.matches&&window.solarApp?.selected)selected()}));reduced.addEventListener('change',safe(()=>{refresh();queueMeasure()}));
+ window.addEventListener('pointermove',safe(event=>{if(!fine.matches||reduced.matches||event.pointerType==='touch')return;mouse={x:event.clientX,y:event.clientY};refresh()}),{passive:true});document.addEventListener('pointerleave',safe(()=>{mouse={x:-900,y:-900};refresh()}));
+ attach();queueMeasure();refresh();window.observatoryAtmosphere={refresh,measure,centerPlanet,syncSelection,paletteAt};
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{try{install()}catch(_){document.body.classList.remove('universe-enhanced','planet-focus');document.querySelector('.universe-atmosphere')?.remove() }},{once:true});else install();
+}catch(_){document.body?.classList.remove('universe-enhanced','planet-focus');document.querySelector('.universe-atmosphere')?.remove()}})();
+/* FIN · Mejora opcional de universo y móvil. */
+
+</script>
+<script id="paletas-vivas-script">
+/* INICIO · Sincronización de color del menú (añadido reversible).
+   Pegar dentro de <script>, después de los scripts existentes y antes de </body>.
+   Usa body[data-palette] del bloque universo-mobile.js; no crea otro scrollspy. */
+(()=>{'use strict';try{
+ function install(){const body=document.body,sidebar=document.querySelector('.sidebar'),bar=document.querySelector('.mobile-top');if(!sidebar||window.observatoryPaletteMenu)return;
+  const names={portada:'Universo',cinematica:'Cinemática',dinamica:'Dinámica',kepler:'Circular y Kepler',energia:'Energía',juegos:'Zona de juegos',recursos:'Recursos'};
+  const sync=()=>{try{const palette=body.dataset.palette||'portada';for(const el of [sidebar,bar])if(el){el.dataset.palette=palette;el.dataset.appearance=body.classList.contains('light')?'claro':'oscuro'}sidebar.dataset.paletteName=names[palette]||names.portada}catch(_){}};
+  if(typeof MutationObserver==='function')new MutationObserver(sync).observe(body,{attributes:true,attributeFilter:['data-palette','class']});
+  window.observatoryPaletteMenu={sync};sync();window.observatoryAtmosphere?.refresh();
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{try{install()}catch(_){}},{once:true});else install();
+}catch(_){/* El menú mantiene su navegación aunque falle el efecto. */}})();
+/* FIN · Sincronización de color del menú. */
+
 </script>
 </body>
 </html>
